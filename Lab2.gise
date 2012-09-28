@@ -26,15 +26,17 @@
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="isim"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_CMD" xil_pn:name="isim.cmd"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_LOG" xil_pn:name="isim.log"/>
-    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="shift_left_1bit_test_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="shift_left_1bit_test_isim_beh.exe"/>
-    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="shift_left_1bit_test_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="shift_left_32bit_test_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="shift_left_32bit_test_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="shift_left_32bit_test_isim_beh.wdb"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="shift_right_arithmetic_32bit_test_isim_beh.exe"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="shift_right_logical_32bit_test_isim_beh.exe"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_INI" xil_pn:name="xilinxsim.ini"/>
   </files>
 
   <transforms xmlns="http://www.xilinx.com/XMLSchema">
-    <transform xil_pn:end_ts="1348851344" xil_pn:in_ck="-8284232267361527130" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1348851344">
+    <transform xil_pn:end_ts="1348857427" xil_pn:in_ck="7702070845142129315" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1348857427">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="add_1bit.v"/>
@@ -48,6 +50,8 @@
       <outfile xil_pn:name="set_less_than_32bit_test.v"/>
       <outfile xil_pn:name="shift_left_1bit.v"/>
       <outfile xil_pn:name="shift_left_1bit_test.v"/>
+      <outfile xil_pn:name="shift_left_32bit.v"/>
+      <outfile xil_pn:name="shift_left_32bit_test.v"/>
       <outfile xil_pn:name="shift_right_1bit.v"/>
       <outfile xil_pn:name="shift_right_1bit_test.v"/>
       <outfile xil_pn:name="shift_right_arithmetic_32bit.v"/>
@@ -62,11 +66,11 @@
       <outfile xil_pn:name="test_mux_2to1.v"/>
       <outfile xil_pn:name="test_mux_4to1.v"/>
     </transform>
-    <transform xil_pn:end_ts="1348851159" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-7735197382541744339" xil_pn:start_ts="1348851159">
+    <transform xil_pn:end_ts="1348857427" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="200749121723079905" xil_pn:start_ts="1348857427">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1348851159" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="6820844727337105643" xil_pn:start_ts="1348851159">
+    <transform xil_pn:end_ts="1348857427" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="-2351447208735779169" xil_pn:start_ts="1348857427">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
@@ -74,7 +78,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1348851344" xil_pn:in_ck="-8284232267361527130" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1348851344">
+    <transform xil_pn:end_ts="1348857427" xil_pn:in_ck="7702070845142129315" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1348857427">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="add_1bit.v"/>
@@ -88,6 +92,8 @@
       <outfile xil_pn:name="set_less_than_32bit_test.v"/>
       <outfile xil_pn:name="shift_left_1bit.v"/>
       <outfile xil_pn:name="shift_left_1bit_test.v"/>
+      <outfile xil_pn:name="shift_left_32bit.v"/>
+      <outfile xil_pn:name="shift_left_32bit_test.v"/>
       <outfile xil_pn:name="shift_right_1bit.v"/>
       <outfile xil_pn:name="shift_right_1bit_test.v"/>
       <outfile xil_pn:name="shift_right_arithmetic_32bit.v"/>
@@ -102,7 +108,7 @@
       <outfile xil_pn:name="test_mux_2to1.v"/>
       <outfile xil_pn:name="test_mux_4to1.v"/>
     </transform>
-    <transform xil_pn:end_ts="1348851346" xil_pn:in_ck="-8284232267361527130" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-8081121594141799527" xil_pn:start_ts="1348851344">
+    <transform xil_pn:end_ts="1348857430" xil_pn:in_ck="7702070845142129315" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-992511557579475775" xil_pn:start_ts="1348857427">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
@@ -110,16 +116,16 @@
       <outfile xil_pn:name="fuse.log"/>
       <outfile xil_pn:name="isim"/>
       <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="shift_left_1bit_test_beh.prj"/>
-      <outfile xil_pn:name="shift_left_1bit_test_isim_beh.exe"/>
+      <outfile xil_pn:name="shift_left_32bit_test_beh.prj"/>
+      <outfile xil_pn:name="shift_left_32bit_test_isim_beh.exe"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1348851347" xil_pn:in_ck="4755597467901192858" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="8872734694930359772" xil_pn:start_ts="1348851346">
+    <transform xil_pn:end_ts="1348857430" xil_pn:in_ck="-16768142171213799" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="2689048392813625700" xil_pn:start_ts="1348857430">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="isim.cmd"/>
       <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="shift_left_1bit_test_isim_beh.wdb"/>
+      <outfile xil_pn:name="shift_left_32bit_test_isim_beh.wdb"/>
     </transform>
   </transforms>
 
