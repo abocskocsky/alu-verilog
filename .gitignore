@@ -1,0 +1,11 @@
+*.exe
+*.prj
+*.wdb
+_xmsgs/
+fuse.log
+isim.cmd
+isim.log
+isim/
+mux_16to1_summary.html
+xilinxsim.ini
+
