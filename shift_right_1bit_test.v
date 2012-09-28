@@ -22,7 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module shift_right_logical_1bit_test;
+module shift_right_1bit_test;
 
 	// Inputs
 	reg [31:0] X;
@@ -33,7 +33,7 @@ module shift_right_logical_1bit_test;
 	wire Z;
 
 	// Instantiate the Unit Under Test (UUT)
-	shift_right_logical_1bit uut (
+	shift_right_1bit uut (
 		.X(X), 
 		.Y(Y), 
 		.i(i), 
@@ -47,10 +47,10 @@ module shift_right_logical_1bit_test;
 		i = 0;
 
 		// Wait 100 ns for global reset to finish
-      X = 32'b1010; Y = 1; i = 0; #100;
-      X = 32'b1010; Y = 2; i = 0; #100;
-      X = 32'b1010; Y = 7; i = 0; #100;
-      X = 32'b1010; Y = 35; i = 0; #100;
+      X = 32'b1010; Y = 1; I = 0; V = 0; #100;
+      X = 32'b1010; Y = 2; I = 0; V = 0; #100;
+      X = 32'b1010; Y = 7; I = 0; V = 1; #100;
+      X = 32'b1010; Y = 35; I = 0; V = 0; #100;
 
 	end
       
