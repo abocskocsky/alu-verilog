@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2012-09-28T12:44:20</DateModified>
+  <DateModified>2012-09-28T15:11:16</DateModified>
   <ModuleName>mux_16to1</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>/home/bhood/.Xilinx/workspace/Lab2/iseconfig/mux_16to1.xreport</SavedFilePath>
