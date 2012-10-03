@@ -49,6 +49,8 @@ module shift_right_logical_32bit_test;
       
       X = 32'hffffffff; Y = 32'hffffffff; #100; // shifting by -1 -> should be unsigned
       X = 32'hffffffff; Y = 32'hff; #100; // should be all zeros
+      
+      X = 0; Y = 32'h7fffffff; #100;
 
 	end
       

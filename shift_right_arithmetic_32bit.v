@@ -46,18 +46,17 @@ module shift_right_arithmetic_32bit(X,Y,Z);
    shift_right_1bit BIT30 (.X(X), .Y(Y), .I(30), .V(X[31]), .Z(tempZ[30]));
    shift_right_1bit BIT31 (.X(X), .Y(Y), .I(31), .V(X[31]), .Z(tempZ[31]));
    
-   // Special case: if X == -1, then the result is 0.
-   // Also, shifts are unsigned, so if we see a negative
-   // number, we know the result must equal zero.
+   // Special cases: if X == -1, then the result is 0.
+   //                if Y > 31 || Y < 0 (signed), the result is 0
    wire [31:0] test_minus1;
    wire [1:0] spec_cases;
-   wire temp;
+   wire temp, test_gt31, test_lt0;
    add_32bit TEST_MINUS1_ADD (.X(X), .Y(32'b1), .Z(test_minus1), .C_IN(1'b0), .C_OUT(temp));
+   set_less_than_32bit LT0 (.X(Y), .Y(32'b0), .Z(test_lt0));
+   set_less_than_32bit GT31 (.X(32'd31), .Y(Y), .Z(test_gt31));
    assign spec_cases[0] = test_minus1 ? 0 : 1;
-   assign spec_cases[1] = Y[31];
-   
-   // Shifts are unsigned, so if we see a negative number
-   // we know the result must equal zero.
+   assign spec_cases[1] = test_gt31 | test_lt0;
+
    mux_4to1 SPECIALCASES (.W(tempZ), .X(32'b0), .Y(32'b0), .Z(32'b0), .C(spec_cases), .R(Z));
 
 endmodule

@@ -63,11 +63,37 @@ module alu_test;
 		X = 0; Y = 0; op_code = 0;
 		for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
 			#10;
+         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
 		end
       
       X = 1; Y = 2;
       for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
 			#10;
+         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      X = 0; Y = 32'h44906a28;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10;
+         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      X = 32'hffffffff; Y = 32'h7fffffff;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10;
+         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      X = 32'b1; Y = 32'h7fffffff;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10;
+         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      X = 32'b1; Y = 32'hffffffff;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10;
+         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
 		end
 	end
       
