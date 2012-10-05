@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <!--This is an ISE project configuration file.-->
 <!--It holds project specific layout data for the projectmgr plugin.-->
 <!--Copyright (c) 1995-2009 Xilinx, Inc.  All rights reserved.-->
@@ -8,16 +8,50 @@
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
          <ClosedNode>/mux_16to1 |home|bhood|.Xilinx|workspace|Lab2|mux_16to1.v</ClosedNode>
+         <ClosedNode>/shift_left_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_left_32bit.v</ClosedNode>
+         <ClosedNode>/shift_right_arithmetic_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_arithmetic_32bit.v</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT1 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT10 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT11 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT12 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT13 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT14 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT15 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT16 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT17 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT18 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT19 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT2 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT20 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT21 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT22 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT23 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT24 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT25 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT26 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT27 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT28 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT29 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT3 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT30 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT31 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT4 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT5 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT6 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT7 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT8 - shift_right_logical_1bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/BIT9 - shift_right_logical_1bit</ClosedNode>
          <ClosedNode>/subtract_32bit |home|bhood|.Xilinx|workspace|Lab2|subtract_32bit.v</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>subtract_32bit (/home/bhood/.Xilinx/workspace/Lab2/subtract_32bit.v)</SelectedItem>
+         <SelectedItem>alu (/home/bhood/.Xilinx/workspace/Lab2/alu.v)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000118000000020000000000000000000000000200000064ffffffff000000810000000300000002000001180000000100000003000000000000000100000003</ViewHeaderState>
-      <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>subtract_32bit (/home/bhood/.Xilinx/workspace/Lab2/subtract_32bit.v)</CurrentItem>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001cf000000020000000000000000000000000200000064ffffffff000000810000000300000002000001cf0000000100000003000000000000000100000003</ViewHeaderState>
+      <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
+      <CurrentItem>alu (/home/bhood/.Xilinx/workspace/Lab2/alu.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VERILOG" guiview="Process" >
       <ClosedNodes>
@@ -44,9 +78,9 @@
       <SelectedItems/>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000006bc000000040101000100000000000000000000000064ffffffff000000810000000000000004000000910000000100000000000000660000000100000000000000840000000100000000000005410000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000006ac000000040101000100000000000000000000000064ffffffff000000810000000000000004000000910000000100000000000000660000000100000000000000840000000100000000000005310000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem>mux_2to1.v</CurrentItem>
    </ItemView>
    <ItemView guiview="Library" >
       <ClosedNodes>
@@ -56,9 +90,9 @@
       <SelectedItems/>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000006bc000000010001000100000000000000000000000064ffffffff000000810000000000000001000006bc0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000000000000010000000000000000000000000000000000000125000000010001000100000000000000000000000064ffffffff000000810000000000000001000001250000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem>work</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -66,31 +100,47 @@
          <ClosedNode>Design Utilities</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem></SelectedItem>
+         <SelectedItem/>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000f1000000010000000100000000000000000000000064ffffffff000000810000000000000001000000f10000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem/>
    </ItemView>
    <ItemView engineview="BehavioralSim" guiview="Source" compilemode="AutoCompile" >
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
+         <ClosedNode>/add_32bit_test |home|bhood|.Xilinx|workspace|Lab2|add_32bit_test.v/uut - add_32bit</ClosedNode>
+         <ClosedNode>/alu_test |home|bhood|.Xilinx|workspace|Lab2|alu_test.v/uut - alu</ClosedNode>
+         <ClosedNode>/set_less_than_32bit_test |home|bhood|.Xilinx|workspace|Lab2|set_less_than_32bit_test.v/uut - set_less_than_32bit/SUB1 - subtract_32bit</ClosedNode>
+         <ClosedNode>/shift_left_1bit_test |home|bhood|.Xilinx|workspace|Lab2|shift_left_1bit_test.v/uut - shift_left_1bit</ClosedNode>
+         <ClosedNode>/shift_left_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_left_32bit.v</ClosedNode>
+         <ClosedNode>/shift_left_32bit_test |home|bhood|.Xilinx|workspace|Lab2|shift_left_32bit_test.v/uut - shift_left_32bit</ClosedNode>
+         <ClosedNode>/shift_right_1bit_test |home|bhood|.Xilinx|workspace|Lab2|shift_right_1bit_test.v/uut - shift_right_1bit</ClosedNode>
+         <ClosedNode>/shift_right_arithmetic_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_arithmetic_32bit.v</ClosedNode>
+         <ClosedNode>/shift_right_arithmetic_32bit_test |home|bhood|.Xilinx|workspace|Lab2|shift_right_arithmetic_32bit_test.v/uut - shift_right_arithmetic_32bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_1bit_test |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_1bit_test.v/uut - shift_right_logical_1bit/ADD - add_32bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_1bit_test |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_1bit_test.v/uut - shift_right_logical_1bit/SLT - set_less_than_32bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_1bit_test |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_1bit_test.v/uut - shift_right_logical_1bit/set_less_than_32bit - set_less_than_32bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/add_32bit - add_32bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit.v/set_less_than_32bit - set_less_than_32bit/SUB1 - subtract_32bit</ClosedNode>
+         <ClosedNode>/shift_right_logical_32bit_test |home|bhood|.Xilinx|workspace|Lab2|shift_right_logical_32bit_test.v/uut - shift_right_logical_32bit</ClosedNode>
          <ClosedNode>/subtract_1bit_test |home|bhood|.Xilinx|workspace|Lab2|subtract_1bit_test.v</ClosedNode>
          <ClosedNode>/subtract_32bit_test |home|bhood|.Xilinx|workspace|Lab2|subtract_32bit_test.v</ClosedNode>
          <ClosedNode>/test_mux_16to1 |home|bhood|.Xilinx|workspace|Lab2|test_mux_16to1.v</ClosedNode>
+         <ClosedNode>/test_mux_16to1 |home|bhood|.Xilinx|workspace|Lab2|test_mux_16to1.v/uut - mux_16to1</ClosedNode>
          <ClosedNode>/test_mux_2to1 |home|bhood|.Xilinx|workspace|Lab2|test_mux_2to1.v</ClosedNode>
          <ClosedNode>/test_mux_4to1 |home|bhood|.Xilinx|workspace|Lab2|test_mux_4to1.v</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>subtract_32bit_test (/home/bhood/.Xilinx/workspace/Lab2/subtract_32bit_test.v)</SelectedItem>
+         <SelectedItem>alu_test (/home/bhood/.Xilinx/workspace/Lab2/alu_test.v)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000196000000020000000000000000000000000200000064ffffffff000000810000000300000002000001960000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000206000000020000000000000000000000000200000064ffffffff000000810000000300000002000002060000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>subtract_32bit_test (/home/bhood/.Xilinx/workspace/Lab2/subtract_32bit_test.v)</CurrentItem>
+      <CurrentItem>alu_test (/home/bhood/.Xilinx/workspace/Lab2/alu_test.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -98,13 +148,13 @@
          <ClosedNode>Design Utilities</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem></SelectedItem>
+         <SelectedItem/>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000f1000000010000000100000000000000000000000064ffffffff000000810000000000000001000000f10000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem/>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="DESUT_VERILOG" guiview="Process" >
       <ClosedNodes>

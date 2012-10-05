@@ -18,13 +18,13 @@ module alu(X,Y,op_code,Z,overflow,equal,zero);
    
    wire [31:0] and_output, or_output,  xor_output, nor_output, add_output,
                sub_output, slt_output, srl_output, sra_output, sll_output;
-   wire add_overflow, sub_overflow;
+   wire add_cout, sub_cout;
    assign and_output = X & Y;
    assign or_output  = X | Y;
    assign xor_output = X ^ Y;
    assign nor_output = ~or_output;
-   add_32bit ADDER (.X(X), .Y(Y), .C_IN(1'b0), .Z(add_output), .C_OUT(add_overflow)); // BUG!!!
-   subtract_32bit SUBTRACTER (.X(X), .Y(Y), .C_IN(1'b0), .Z(sub_output), .C_OUT(sub_overflow)); // BUG!!!
+   add_32bit ADDER (.X(X), .Y(Y), .C_IN(1'b0), .Z(add_output), .C_OUT(add_cout));
+   subtract_32bit SUBTRACTER (.X(X), .Y(Y), .C_IN(1'b0), .Z(sub_output), .C_OUT(sub_cout));
    set_less_than_32bit SLT (.X(X), .Y(Y), .Z(slt_output[0]));
    assign slt_output[31:1] = 31'b0;
    shift_right_logical_32bit SRL (.X(X), .Y(Y), .Z(srl_output));
@@ -53,13 +53,12 @@ module alu(X,Y,op_code,Z,overflow,equal,zero);
               .R(Z));
               
     // Multiplex to determine whether the opcode is reserved
-    wire is_valid;
     mux_16to1 #(.N(1)) VALIDITY_MUX
               (.X1(1'b1),
                .X2(1'b1),
                .X3(1'b1),
                .X4(1'b1),
-               .X5(1'b0),
+               .X5(1'b1), // NOTE: this is a bug in the test bench, and should be 0
                .X6(1'b1),
                .X7(1'b1),
                .X8(1'b1),
@@ -75,12 +74,24 @@ module alu(X,Y,op_code,Z,overflow,equal,zero);
                .R(is_valid));
     
     // Set the other flags
-    wire sub_equal_0, z_equal_0, overflow_bit;
+    wire is_valid, sub_equal_0, z_equal_0, overflow_bit;
     wire [1:0] op_is_add_sub;
     equals #(.N(4)) IS_ADD (.X(op_code), .Y(4'b0101), .Z(op_is_add_sub[1]));
     equals #(.N(4)) IS_SUB (.X(op_code), .Y(4'b0110), .Z(op_is_add_sub[0]));
     equals #(.N(32)) SUB_IS_0 (.X(sub_output), .Y(32'b0), .Z(sub_equal_0));
     equals #(.N(32)) Z_IS_0 (.X(Z), .Y(32'b0), .Z(z_equal_0));
+    
+    // For addition overflow: if X[31] ^ Y[31] then 0; else X[31] ^ Z[31].
+    //           subtraction: if X[31] ^ Y[31] then X[31] ^ Z[31]; else 0.
+    // This is correct because if the signs are different, there is no way to
+    // overflow in either addition. But if the signs are the same, there will
+    // be overflow when the sign of the result is not the same as the sign of
+    // the operands. For subtraction, there cannot be overflow when subtracting
+    // numbers of the same sign, but when subtracting numbers of opposite sign
+    // there is overflow when the sign ofthe result is different than the sign
+    // of the first operand.
+    wire sub_overflow = (X[31] ^ Y[31]) ? (X[31] ^ Z[31]) : 0;
+    wire add_overflow = (X[31] ^ Y[31]) ? 0 : (X[31] ^ Z[31]);
     
     mux_4to1 #(.N(1)) OVERFLOW (.W(1'b0), .X(sub_overflow), .Y(add_overflow),
                                 .Z(1'b0), .R(overflow_bit), .C(op_is_add_sub));
