@@ -36,22 +36,23 @@ module shift_right_1bit_test;
 	shift_right_1bit uut (
 		.X(X), 
 		.Y(Y), 
-		.i(i), 
+		.I(i), 
 		.Z(Z)
 	);
 
 	initial begin
-		// Initialize Inputs
-		X = 0;
-		Y = 0;
-		i = 0;
-
-		// Wait 100 ns for global reset to finish
+      X = 32'b1010; Y = 0; I = 0; V = 0; #100;
+      X = 32'b1010; Y = 0; I = 1; V = 0; #100;
       X = 32'b1010; Y = 1; I = 0; V = 0; #100;
-      X = 32'b1010; Y = 2; I = 0; V = 0; #100;
-      X = 32'b1010; Y = 7; I = 0; V = 1; #100;
-      X = 32'b1010; Y = 35; I = 0; V = 0; #100;
-
+      X = 32'b1010; Y = 1; I = 2; V = 0; #100;
+      X = 32'b1010; Y = 35; I = 1; V = 0; #100;
+      // These will shift by negative amounts because the logic which makes
+      // sure Y is handled as unsigned happens in the 32-bit shifter.
+      X = 32'b1010; Y = 32'hffffffff; I = 0; V = 0; #100;
+      X = 32'b1010; Y = 32'hffffffff; I = 1; V = 0; #100;
+      // Should result in 00000000 and 11111111, respectively
+      X = 32'b1010; Y = 32'h7fffffff; I = 0; V = 0; #100;
+      X = 32'b1010; Y = 32'h7fffffff; I = 1; V = 1; #100;
 	end
       
 endmodule

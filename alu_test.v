@@ -60,41 +60,72 @@ module alu_test;
 	);
 
 	initial begin
-		X = 0; Y = 0; op_code = 0;
+      // Test zeros
+		X = 0; Y = 0;
 		for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
-			#10;
-         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
 		end
       
+      // Test that it works right when X > Y
+      X = 1; Y = 0;
+		for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      // Test that it works right when Y < X and no bits overlap
       X = 1; Y = 2;
       for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
-			#10;
-         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
 		end
       
-      X = 0; Y = 32'h44906a28;
+      // Test that negative numbers are handled correctly.
+      X = 32'hffffffff; Y = 2;
       for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
-			#10;
-         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
 		end
       
-      X = 32'hffffffff; Y = 32'h7fffffff;
-      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
-			#10;
-         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
-		end
-      
-      X = 32'b1; Y = 32'h7fffffff;
-      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
-			#10;
-         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
-		end
-      
+      // Test that negatives are handled correctly, even when shifting.
       X = 32'b1; Y = 32'hffffffff;
       for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
-			#10;
-         $display("op=%2d, X=%x, Y=%x, Z=%x, zero=%b, equal=%b, overflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
 		end
+      
+      // Test the overflow
+      X = 32'h80000000; Y = 32'hffffffff;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      X = 32'hffffffff; Y = 32'h80000000;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      // One of the failed test cases from the error log
+      X = 0; Y = 32'h44906a28;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      // Test the overflow in the other direction
+      X = 32'h44906a28; Y = 32'h44906a28;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      // One of the failed test cases from the error log
+      X = 32'hffffffff; Y = 32'h7fffffff;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      // One of the failed test cases from the error log
+      X = 32'b1; Y = 32'h7fffffff;
+      for (op_code = 4'b0; op_code <= `MAX_OP_CODE; op_code = op_code + 1) begin
+			#10; $display("op=%2d\tX=%x\tY=%x\tZ=%x\tzero=%b\tequal=%b\toverflow=%b", op_code, X, Y, Z, zero, equal, overflow);
+		end
+      
+      $display("\n");
 	end
       
 endmodule

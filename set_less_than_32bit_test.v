@@ -39,21 +39,18 @@ module set_less_than_32bit_test;
 	);
 
 	initial begin
-		// Initialize Inputs
-		X = 0;
-		Y = 0;
-
-		// Wait 100 ns for global reset to finish
-		X = 0; Y = 0; #100; // false
-      X = 0; Y = 1; #100; // true
-      X = 0; Y = 32'hffffffff; #100; // false
-      X = 32'hfffffffe; Y = 32'hffffffff; #100; // true
-      X = 1; Y = 0; #100; // false
-      X = 32'h7fffffff; Y = 32'hffffffff; #100; // false
-      X = 32'hffffffff; Y = 32'h70ffffff; #100; // true
-        
-		// Add stimulus here
-
+		X = 0; Y = 0; #10; // false
+      X = 0; Y = 1; #10; // true
+      X = 1; Y = 0; #10; // false
+      X = 0; Y = 32'hffffffff; #10; // false
+      X = 32'h8429842f; Y = 32'h22feabc3; #10; // true
+      X = 32'h22feabc3; Y = 32'h8429842f; #10; // false
+      X = 32'h23498723; Y = 32'h22feabc3; #10; // false
+      X = 32'h8429842f; Y = 32'h87234234; #10; // true
+      X = 32'hffffffff; Y = 32'hffffffff; #10; // false
+      X = 32'hfffffffe; Y = 32'hffffffff; #10; // true
+      X = 32'h7fffffff; Y = 32'hffffffff; #10; // false
+      X = 32'hffffffff; Y = 32'h70ffffff; #10; // true
 	end
       
 endmodule

@@ -48,17 +48,15 @@ module add_1bit_test;
 		Y = 0;
 		C_IN = 0;
 
-		// Wait 100 ns for global reset to finish
+		// Test all of the possibilities
       X = 0; Y = 0; C_IN = 0; #100;
-      X = 0; Y = 1; C_IN = 0; #100;
       X = 0; Y = 0; C_IN = 1; #100;
+      X = 0; Y = 1; C_IN = 0; #100;
       X = 0; Y = 1; C_IN = 1; #100;
       X = 1; Y = 0; C_IN = 0; #100;
       X = 1; Y = 0; C_IN = 1; #100;
       X = 1; Y = 1; C_IN = 0; #100;
       X = 1; Y = 1; C_IN = 1; #100;
-        
-		// Add stimulus here
 
 	end
       

@@ -39,17 +39,14 @@ module shift_right_arithmetic_32bit_test;
 	);
 
 	initial begin
-		// Initialize Inputs
-		X = 0;
-		Y = 0;
-		
-		// Wait 100 ns for global reset to finish
-		X = 32'h7fffffff; Y = 32'h10; #100; // move it over halfway, should
-      X = 32'haaaaaaaa; Y = 1; #100; // 1010... to 0101...
+		X = 32'h7fffffff; Y = 32'h10; #100; // move it over just past halfway
+      X = 32'haaaaaaaa; Y = 1; #100; // 1010... to 110101...
       
       X = 32'h7fffffff; Y = 32'hffffffff; #100; // shifting by -1 -> unsigned
       X = 32'hffffffff; Y = 32'hff; #100; // should be all zeros
-
+      
+      X = 32'hffffffff; Y = 32'h1; #100; // edge case: should be all zeros
+      X = 32'h80000000; Y = 32'h1; #100; // ==> divide by 2
 	end
       
 endmodule

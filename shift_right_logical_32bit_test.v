@@ -39,11 +39,6 @@ module shift_right_logical_32bit_test;
 	);
 
 	initial begin
-		// Initialize Inputs
-		X = 0;
-		Y = 0;
-
-		// Wait 100 ns for global reset to finish
 		X = 32'hffffffff; Y = 32'h10; #100; // move it over halfway
       X = 32'haaaaaaaa; Y = 1; #100; // 1010... to 0101...
       

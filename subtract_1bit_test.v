@@ -48,7 +48,7 @@ module subtract_1bit_test;
 		Y = 0;
 		C_IN = 0;
 
-		// Wait 100 ns for global reset to finish
+		// Try all the combinations.
 		X = 0; Y = 0; C_IN = 0; #100;
       X = 0; Y = 0; C_IN = 1; #100;
       X = 0; Y = 1; C_IN = 0; #100;

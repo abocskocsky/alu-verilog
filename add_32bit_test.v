@@ -43,20 +43,25 @@ module add_32bit_test;
 	);
 
 	initial begin
-		// Initialize Inputs
-		X = 0;
-		Y = 0;
-		C_IN = 0;
-
-		// Wait 100 ns for global reset to finish
-      X = 32'b00000; Y = 32'b000000; #100;
-      X = 32'b00001; Y = 32'b000001; #100;
-      X = 32'b111111111111111111111111111111111; Y = 32'b111111111111111111111111111111111; #100;
-      X = 32'b00011; Y = 32'b001100; #100;
-      X = 32'b00001; Y = 32'b001111; #100;
-      X = 32'b011111111111111111111111111111111; Y = 32'b0000001; #100;
-        
-		// Add stimulus here
+		// Test 0, +/-1, N-1, and N, where N is the largest +/- 32-bit integer.
+      X = 32'h0; Y = 32'h0; C_IN = 1'b0; #10;
+      X = 32'h1; Y = 32'h0; C_IN = 1'b0; #10;
+      X = 32'h0; Y = 32'h1; C_IN = 1'b1; #10;
+      X = 32'h1; Y = 32'h1; C_IN = 1'b1; #10;
+      X = 32'hffffffff; Y = 32'h0; C_IN = 1'b0; #10;
+      X = 32'h0; Y = 32'hffffffff; C_IN = 1'b1; #10;
+      X = 32'hffffffff; Y = 32'hffffffff; C_IN = 1'b0; #10;
+      X = 32'h1; Y = 32'hffffffff; C_IN = 1'b0; #10;
+      X = 32'hffffffff; Y = 32'h1; C_IN = 1'b0; #10;
+      X = 32'hffffffff; Y = 32'h2; C_IN = 1'b0; #10;
+      X = 32'b0011; Y = 32'b1100; C_IN = 1'b0; #100;
+      X = 32'b0001; Y = 32'b1111; C_IN = 1'b0; #100;
+      X = 32'hffffffff; Y = 32'h7fffffff; C_IN = 1'b0; #10;
+      X = 32'h80000000; Y = 32'h7ffffffe; C_IN = 1'b0; #10;
+      X = 32'h80000000; Y = 32'h1; C_IN = 1'b0; #10;
+      X = 32'h7fffffff; Y = 32'h1; C_IN = 1'b0; #10;
+      X = 32'h7fffffff; Y = 32'h7fffffff; C_IN = 1'b0; #10;
+      X = 32'h7ffffffe; Y = 32'h1; C_IN = 1'b1; #10;
 
 	end
       

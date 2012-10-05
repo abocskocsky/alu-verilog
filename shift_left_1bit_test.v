@@ -41,17 +41,18 @@ module shift_left_1bit_test;
 	);
 
 	initial begin
-		// Initialize Inputs
-		X = 0;
-		Y = 0;
-		I = 0;
-		
-		// Wait 100 ns for global reset to finish
       X = 32'b1010; Y = 0; I = 0; #100;
       X = 32'b1010; Y = 0; I = 1; #100;
       X = 32'b1010; Y = 1; I = 0; #100;
       X = 32'b1010; Y = 1; I = 2; #100;
       X = 32'b1010; Y = 35; I = 1; #100;
+      // These will shift by negative amounts because the logic which makes
+      // sure Y is handled as unsigned happens in the 32-bit shifter.
+      X = 32'b1010; Y = 32'hffffffff; I = 0; #100;
+      X = 32'b1010; Y = 32'hffffffff; I = 1; #100;
+      // Should result in 00000000
+      X = 32'b1010; Y = 32'h7fffffff; I = 0; #100;
+      X = 32'b1010; Y = 32'h7fffffff; I = 1; #100;
 
 	end
       
