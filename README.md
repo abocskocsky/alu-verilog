@@ -1,4 +1,0 @@
-alu-verilog
-===========
-
-alu implementation
