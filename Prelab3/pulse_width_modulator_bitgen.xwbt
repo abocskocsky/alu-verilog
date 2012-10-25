@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/bhood/.Xilinx/workspace/Prelab3/pulse_width_modulator.ncd
+OUTFILE=/home/bhood/.Xilinx/workspace/Prelab3/pulse_width_modulator.bit
+FAMILY=Spartan6
+PART=xc6slx45-3csg324
+WORKINGDIR=/home/bhood/.Xilinx/workspace/Prelab3
+LICENSE=WebPack
+USER_INFO=207362390_0_0_257

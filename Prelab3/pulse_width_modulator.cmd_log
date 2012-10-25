@@ -1,0 +1,6 @@
+xst -intstyle ise -ifn "/home/bhood/.Xilinx/workspace/Prelab3/pulse_width_modulator.xst" -ofn "/home/bhood/.Xilinx/workspace/Prelab3/pulse_width_modulator.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc6slx45-csg324-3 pulse_width_modulator.ngc pulse_width_modulator.ngd  
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o pulse_width_modulator_map.ncd pulse_width_modulator.ngd pulse_width_modulator.pcf 
+par -w -intstyle ise -ol high -mt off pulse_width_modulator_map.ncd pulse_width_modulator.ncd pulse_width_modulator.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml pulse_width_modulator.twx pulse_width_modulator.ncd -o pulse_width_modulator.twr pulse_width_modulator.pcf 
+bitgen -intstyle ise -f pulse_width_modulator.ut pulse_width_modulator.ncd 
