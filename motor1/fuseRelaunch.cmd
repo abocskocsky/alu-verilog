@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "/home/bhood/.Xilinx/workspace/motor1/test_motor_driver_isim_beh.exe" -prj "/home/bhood/.Xilinx/workspace/motor1/test_motor_driver_beh.prj" "work.test_motor_driver" "work.glbl" 

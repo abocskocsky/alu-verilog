@@ -1,0 +1,509 @@
+Release 13.4 - xst O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.07 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.07 secs
+ 
+--> 
+Reading design: main.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "main.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "main"
+Output Format                      : NGC
+Target Device                      : xc6slx45-2-csg324
+
+---- Source Options
+Top Module Name                    : main
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+INFO:Xst - Part-select index evaluated to out of bound value may lead to incorrect synthesis results; it is recommended not to use them in RTL
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/bhood/.Xilinx/workspace/motor1/pulse_width_modulator.v" into library work
+Parsing module <pulse_width_modulator>.
+Analyzing Verilog file "/home/bhood/.Xilinx/workspace/motor1/triangle.v" into library work
+Parsing module <triangle>.
+Analyzing Verilog file "/home/bhood/.Xilinx/workspace/motor1/motor_driver.v" into library work
+Parsing module <motor_driver>.
+Analyzing Verilog file "/home/bhood/.Xilinx/workspace/motor1/main.v" into library work
+Parsing module <main>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating module <main>.
+
+Elaborating module <triangle>.
+WARNING:HDLCompiler:413 - "/home/bhood/.Xilinx/workspace/motor1/triangle.v" Line 32: Result of 9-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/bhood/.Xilinx/workspace/motor1/triangle.v" Line 34: Result of 9-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/bhood/.Xilinx/workspace/motor1/triangle.v" Line 39: Result of 9-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/bhood/.Xilinx/workspace/motor1/triangle.v" Line 41: Result of 9-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/bhood/.Xilinx/workspace/motor1/triangle.v" Line 46: Result of 25-bit expression is truncated to fit in 24-bit target.
+
+Elaborating module <motor_driver>.
+
+Elaborating module <pulse_width_modulator>.
+WARNING:HDLCompiler:189 - "/home/bhood/.Xilinx/workspace/motor1/main.v" Line 28: Size mismatch in connection of port <velocity>. Formal port size is 8-bit while actual signal size is 32-bit.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <main>.
+    Related source file is "/home/bhood/.Xilinx/workspace/motor1/main.v".
+WARNING:Xst:647 - Input <switch<7:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <button_up> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <button_down> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <button_right> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <button_left> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <button_center> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <enc0_a> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <enc0_b> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <enc1_a> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <enc1_b> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Summary:
+	no macro.
+Unit <main> synthesized.
+
+Synthesizing Unit <triangle>.
+    Related source file is "/home/bhood/.Xilinx/workspace/motor1/triangle.v".
+    Found 8-bit register for signal <triangle>.
+    Found 1-bit register for signal <updown>.
+    Found 24-bit register for signal <counter>.
+    Found 9-bit adder for signal <n0026> created at line 39.
+    Found 24-bit adder for signal <counter[23]_GND_2_o_add_12_OUT> created at line 46.
+    Found 8-bit subtractor for signal <triangle[7]_GND_2_o_sub_10_OUT<7:0>> created at line 41.
+    Summary:
+	inferred   3 Adder/Subtractor(s).
+	inferred  33 D-type flip-flop(s).
+	inferred   3 Multiplexer(s).
+Unit <triangle> synthesized.
+
+Synthesizing Unit <motor_driver>.
+    Related source file is "/home/bhood/.Xilinx/workspace/motor1/motor_driver.v".
+    Found 1-bit register for signal <dir>.
+    Found 8-bit register for signal <dutyc>.
+    Found 1-bit register for signal <ena>.
+    Summary:
+	inferred  10 D-type flip-flop(s).
+	inferred   1 Multiplexer(s).
+Unit <motor_driver> synthesized.
+
+Synthesizing Unit <pulse_width_modulator>.
+    Related source file is "/home/bhood/.Xilinx/workspace/motor1/pulse_width_modulator.v".
+    Found 8-bit register for signal <counter>.
+    Found 8-bit register for signal <freq_counter>.
+    Found 1-bit register for signal <SIGNAL>.
+    Found 8-bit adder for signal <counter[7]_GND_4_o_add_4_OUT> created at line 47.
+    Found 8-bit adder for signal <freq_counter[7]_GND_4_o_add_5_OUT> created at line 49.
+    Found 8-bit comparator equal for signal <counter[7]_DUTY_CYCLE[7]_equal_3_o> created at line 42
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  17 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+Unit <pulse_width_modulator> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 7
+ 24-bit adder                                          : 1
+ 8-bit adder                                           : 4
+ 8-bit subtractor                                      : 1
+ 9-bit adder                                           : 1
+# Registers                                            : 15
+ 1-bit register                                        : 7
+ 24-bit register                                       : 1
+ 8-bit register                                        : 7
+# Comparators                                          : 2
+ 8-bit comparator equal                                : 2
+# Multiplexers                                         : 5
+ 8-bit 2-to-1 multiplexer                              : 5
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <pulse_width_modulator>.
+The following registers are absorbed into counter <freq_counter>: 1 register on signal <freq_counter>.
+The following registers are absorbed into counter <counter>: 1 register on signal <counter>.
+Unit <pulse_width_modulator> synthesized (advanced).
+
+Synthesizing (advanced) Unit <triangle>.
+The following registers are absorbed into counter <counter>: 1 register on signal <counter>.
+Unit <triangle> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 2
+ 8-bit adder                                           : 1
+ 8-bit subtractor                                      : 1
+# Counters                                             : 5
+ 24-bit up counter                                     : 1
+ 8-bit up counter                                      : 4
+# Registers                                            : 31
+ Flip-Flops                                            : 31
+# Comparators                                          : 2
+ 8-bit comparator equal                                : 2
+# Multiplexers                                         : 5
+ 8-bit 2-to-1 multiplexer                              : 5
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1710 - FF/Latch <dutyc_0> (without init value) has a constant value of 0 in block <motor_driver>. This FF/Latch will be trimmed during the optimization process.
+
+Optimizing unit <main> ...
+
+Optimizing unit <triangle> ...
+
+Optimizing unit <motor_driver> ...
+
+Optimizing unit <pulse_width_modulator> ...
+WARNING:Xst:1710 - FF/Latch <MOTOR_DRIVER1/dutyc_7> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/dutyc_6> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/dutyc_5> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/dutyc_4> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/dutyc_3> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/dutyc_2> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/dutyc_1> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <TRIANGLE/counter_22> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <TRIANGLE/counter_23> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER0/pwm/freq_counter_6> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER0/pwm/freq_counter_7> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/pwm/freq_counter_6> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/pwm/freq_counter_7> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/pwm/SIGNAL> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <MOTOR_DRIVER1/ena> (without init value) has a constant value of 0 in block <main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/counter_7> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/counter_6> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/counter_5> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/counter_4> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/counter_3> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/counter_2> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/counter_1> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/counter_0> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/freq_counter_5> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/freq_counter_3> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/freq_counter_2> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/freq_counter_4> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/freq_counter_0> of sequential type is unconnected in block <main>.
+WARNING:Xst:2677 - Node <MOTOR_DRIVER1/pwm/freq_counter_1> of sequential type is unconnected in block <main>.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block main, actual ratio is 0.
+FlipFlop TRIANGLE/triangle_0 has been replicated 2 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 58
+ Flip-Flops                                            : 58
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : main.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 197
+#      GND                         : 1
+#      INV                         : 5
+#      LUT1                        : 33
+#      LUT2                        : 32
+#      LUT3                        : 14
+#      LUT4                        : 4
+#      LUT5                        : 10
+#      LUT6                        : 26
+#      MUXCY                       : 33
+#      MUXF7                       : 2
+#      VCC                         : 1
+#      XORCY                       : 36
+# FlipFlops/Latches                : 58
+#      FD                          : 29
+#      FDE                         : 7
+#      FDR                         : 7
+#      FDRE                        : 15
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 13
+#      IBUF                        : 1
+#      OBUF                        : 12
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45csg324-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:              57  out of  54576     0%  
+ Number of Slice LUTs:                  124  out of  27288     0%  
+    Number used as Logic:               124  out of  27288     0%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    127
+   Number with an unused Flip Flop:      70  out of    127    55%  
+   Number with an unused LUT:             3  out of    127     2%  
+   Number of fully used LUT-FF pairs:    54  out of    127    42%  
+   Number of unique control sets:         6
+
+IO Utilization: 
+ Number of IOs:                          31
+ Number of bonded IOBs:                  14  out of    218     6%  
+    IOB Flip Flops/Latches:               1
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+cclk                               | BUFGP                  | 58    |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 4.696ns (Maximum Frequency: 212.947MHz)
+   Minimum input arrival time before clock: 4.669ns
+   Maximum output required time after clock: 4.770ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'cclk'
+  Clock period: 4.696ns (frequency: 212.947MHz)
+  Total number of paths / destination ports: 1393 / 72
+-------------------------------------------------------------------------
+Delay:               4.696ns (Levels of Logic = 3)
+  Source:            TRIANGLE/counter_11 (FF)
+  Destination:       TRIANGLE/counter_0 (FF)
+  Source Clock:      cclk rising
+  Destination Clock: cclk rising
+
+  Data Path: TRIANGLE/counter_11 to TRIANGLE/counter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               2   0.525   1.181  TRIANGLE/counter_11 (TRIANGLE/counter_11)
+     LUT6:I0->O            6   0.254   1.104  TRIANGLE/GND_2_o_GND_2_o_equal_2_o<23>1 (TRIANGLE/GND_2_o_GND_2_o_equal_2_o<23>)
+     LUT6:I3->O           12   0.235   1.069  TRIANGLE/Mcount_counter_val241 (TRIANGLE/Mcount_counter_val)
+     LUT2:I1->O            1   0.254   0.000  TRIANGLE/counter_0_rstpot (TRIANGLE/counter_0_rstpot)
+     FD:D                      0.074          TRIANGLE/counter_0
+    ----------------------------------------
+    Total                      4.696ns (1.342ns logic, 3.354ns route)
+                                       (28.6% logic, 71.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'cclk'
+  Total number of paths / destination ports: 59 / 58
+-------------------------------------------------------------------------
+Offset:              4.669ns (Levels of Logic = 3)
+  Source:            rstb (PAD)
+  Destination:       TRIANGLE/counter_0 (FF)
+  Destination Clock: cclk rising
+
+  Data Path: rstb to TRIANGLE/counter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            18   1.328   1.690  rstb_IBUF (rstb_IBUF)
+     LUT6:I0->O           12   0.254   1.069  TRIANGLE/Mcount_counter_val241 (TRIANGLE/Mcount_counter_val)
+     LUT2:I1->O            1   0.254   0.000  TRIANGLE/counter_0_rstpot (TRIANGLE/counter_0_rstpot)
+     FD:D                      0.074          TRIANGLE/counter_0
+    ----------------------------------------
+    Total                      4.669ns (1.910ns logic, 2.759ns route)
+                                       (40.9% logic, 59.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'cclk'
+  Total number of paths / destination ports: 11 / 11
+-------------------------------------------------------------------------
+Offset:              4.770ns (Levels of Logic = 1)
+  Source:            TRIANGLE/triangle_1 (FF)
+  Destination:       led<1> (PAD)
+  Source Clock:      cclk rising
+
+  Data Path: TRIANGLE/triangle_1 to led<1>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q            22   0.525   1.333  TRIANGLE/triangle_1 (TRIANGLE/triangle_1)
+     OBUF:I->O                 2.912          led_1_OBUF (led<1>)
+    ----------------------------------------
+    Total                      4.770ns (3.437ns logic, 1.333ns route)
+                                       (72.1% logic, 27.9% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock cclk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+cclk           |    4.696|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 10.00 secs
+Total CPU time to Xst completion: 9.86 secs
+ 
+--> 
+
+
+Total memory usage is 389968 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   46 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

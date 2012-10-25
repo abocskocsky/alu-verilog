@@ -8,4 +8,8 @@ isim.log
 isim/
 mux_16to1_summary.html
 xilinxsim.ini
+.metadata/
+ByronHoodPreLab2/
+lab1_project/
+pwm_stub/
 
