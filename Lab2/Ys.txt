@@ -1,0 +1,11 @@
+0
+0
+2
+2
+ffffffff
+ffffffff
+80000000
+44906a28
+44906a28
+7fffffff
+7fffffff
