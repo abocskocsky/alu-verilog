@@ -21,13 +21,17 @@ module main(
 	output wire hb0_dir, hb0_ena, hb1_dir, hb1_ena;
 	input wire enc0_a, enc0_b, enc1_a, enc1_b;
 	
-	wire [7:0] triangle_wave;
+	wire [7:0] triangle_wave, rpms0, rpms1;
 	triangle TRIANGLE(.cclk(cclk), .rstb(rstb), .triangle(triangle_wave));
+   
+   encoder_to_rpm ENC0 (.cclk(cclk), .rstb(rstb), .a(enc0_a), .b(enc0_b), .gr(8'ha), .rpm(rpms0));
+   encoder_to_rpm ENC1 (.cclk(cclk), .rstb(rstb), .a(enc1_a), .b(enc1_b), .gr(8'ha), .rpm(rpms1));
 	
 	motor_driver MOTOR_DRIVER0 (.cclk(cclk), .rstb(rstb), .velocity(triangle_wave), .ena(hb0_ena), .dir(hb0_dir));
 	motor_driver MOTOR_DRIVER1 (.cclk(cclk), .rstb(rstb), .velocity(0            ), .ena(hb1_ena), .dir(hb1_dir)); //put in triangle_wave here when you start working with two motors
 		
 	//debugging
-	assign led = triangle_wave;
+	assign led = {rpms1[3:0], rpms0[3:0]};
+
 endmodule
 `default_nettype wire

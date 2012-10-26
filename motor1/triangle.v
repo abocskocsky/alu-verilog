@@ -25,7 +25,7 @@ module triangle(cclk,rstb,triangle);
          triangle <= 8'b0;
          updown <= 1'b1;
       end else begin
-         if (counter == 2604168) begin
+         if (counter == 5208336) begin
             if (updown == 1'b1) begin
                if (triangle == 8'h7f) begin
                   updown <= 0;
