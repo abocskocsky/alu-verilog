@@ -15,10 +15,10 @@ module encoder_to_rpm(cclk,rstb,a,b,rpm, gr);
 	input  wire [7:0] gr; // use 10 to approximate 9.7
 	output wire [7:0] rpm;
 	
-   reg reset_rev_counter;
-	reg [31:0] counter;
-	reg [7:0] rev_counter, a_count, rpms_wire;
+   reg last_a;
+	reg [7:0] rev_counter, a_counter, rpms_wire;
    reg [15:0] raw_rpms;
+	reg [31:0] counter;
    wire [15:0] raw_rpms_wire;
    
    assign rpm = rpms_wire;
@@ -26,46 +26,40 @@ module encoder_to_rpm(cclk,rstb,a,b,rpm, gr);
    // The gear-ratio multiplier.
    multiplier_8bit RATIO (.cclk(cclk), .X(rev_counter), .Y(gr), .Z(raw_rpms_wire));
 
-   always @(posedge(cclk)) begin
+   always @(posedge cclk) begin
       raw_rpms <= raw_rpms_wire;
       if (~rstb) begin
+         a_counter <= 8'b0;
          counter <= 32'b0;
+         rev_counter <= 8'b0;
 			rpms_wire <= 8'b0;
-         reset_rev_counter <= 1'b1;
+         last_a <= 1'b0;
       end else begin
-         if (counter == 10000000) begin
+         if (counter == 32'd10000000) begin
 				rpms_wire <= raw_rpms[7:0];
-            reset_rev_counter <= 1'b1;
-				counter <= 0;
+				counter <= 32'b0;
          end else begin
-            reset_rev_counter <= 1'b0;
-            counter <= counter + 1;
+            counter <= counter + 32'b1;
+            // Every time the motor passes A, increment the rev counter.
+            // If B is already high, then the motor is going counter-clockwise
+            // (negative velocity); otherwise it is going clockwise.
+            if (last_a == 1'b0 && a == 1'b1) begin
+               // There are 48 up edges per full revolution
+               if (a_counter == 8'd48) begin
+                  a_counter <= 8'b0;
+                  if (b == 1'b1) begin
+                     rev_counter <= rev_counter - 8'b1;
+                  end else begin
+                     rev_counter <= rev_counter + 8'b1;
+                  end
+               end else begin
+                  a_counter <= a_counter + 8'b1;
+               end
+            end
+            last_a <= a;
          end
       end
    end
-	
-   // Every time the motor passes A, increment the rev counter.
-   // If B is already high, then the motor is going counter-clockwise
-   // (negative velocity); otherwise it is going clockwise (positive
-   // velocity).
-	always @(posedge(a)) begin
-      if (reset_rev_counter == 1'b1) begin
-         rev_counter <= 8'b0;
-         a_count <= 8'b0;
-      end else begin
-         // There are 48 up edges per full revolution
-         if (a_count == 48) begin
-            a_count <= 8'b0;
-            if (b == 1'b1) begin
-               rev_counter <= rev_counter - 1;
-            end else begin
-               rev_counter <= rev_counter + 1;
-            end
-         end else begin
-            a_count <= a_count + 8'b1;
-         end
-      end
-	end
 
 endmodule
 `default_nettype wire
