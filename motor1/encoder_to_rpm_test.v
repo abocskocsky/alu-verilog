@@ -45,6 +45,8 @@ module encoder_to_rpm_test;
 	);
    
    always #5 cclk <= ~cclk;
+   always #6 a = ~a;
+   always #7 b = ~b;
 
 	initial begin
 		// Initialize Inputs
@@ -55,7 +57,21 @@ module encoder_to_rpm_test;
 		gr = 0;
 
 		@(posedge cclk);
+      rstb = 1;
+      gr = 1;
       
+      #1000000000;
+      #1000000000;
+      #1000000000;
+      #1000000000;
+      #1000000000;
+      #1000000000;
+      #1000000000;
+      #1000000000;
+      #1000000000;
+      #1000000000;
+      #1000000000;
+      #1000000000;
 
 	end
       
