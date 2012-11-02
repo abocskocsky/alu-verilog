@@ -44,12 +44,9 @@
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="cpu_rtl/memory.v"/>
-      <outfile xil_pn:name="cpu_rtl/mips.v"/>
-      <outfile xil_pn:name="cpu_rtl/test_mips.v"/>
-      <outfile xil_pn:name="register_32bit.v"/>
-      <outfile xil_pn:name="test_register_32bit.v"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1351878468" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-8501574180974811234" xil_pn:start_ts="1351878468">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -62,6 +59,8 @@
     <transform xil_pn:end_ts="1351878468" xil_pn:in_ck="1897628991506002820" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="9001384996706587723" xil_pn:start_ts="1351878468">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
       <outfile xil_pn:name="ipcore_dir/fpga_ram.ngc"/>
       <outfile xil_pn:name="ipcore_dir/fpga_ram.v"/>
     </transform>
@@ -72,36 +71,32 @@
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="cpu_rtl/memory.v"/>
-      <outfile xil_pn:name="cpu_rtl/mips.v"/>
-      <outfile xil_pn:name="cpu_rtl/test_mips.v"/>
-      <outfile xil_pn:name="ipcore_dir/fpga_ram.v"/>
-      <outfile xil_pn:name="register_32bit.v"/>
-      <outfile xil_pn:name="test_register_32bit.v"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1351878488" xil_pn:in_ck="3837647496320897840" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="8403424412077398843" xil_pn:start_ts="1351878484">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="fuse.log"/>
-      <outfile xil_pn:name="isim"/>
-      <outfile xil_pn:name="test_register_32bit_beh.prj"/>
-      <outfile xil_pn:name="test_register_32bit_isim_beh.exe"/>
-      <outfile xil_pn:name="xilinxsim.ini"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1351878488" xil_pn:in_ck="3346046083816920694" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-7712191602098932162" xil_pn:start_ts="1351878488">
       <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="NotReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="isim.cmd"/>
-      <outfile xil_pn:name="test_register_32bit_isim_beh.wdb"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:name="TRAN_SubProjectAbstractToPreProxy">
       <status xil_pn:value="SuccessfullyRun"/>
