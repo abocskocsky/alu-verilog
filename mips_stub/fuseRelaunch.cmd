@@ -1,1 +1,0 @@
--intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "C:/Documents and Settings/student/My Documents/GitHub/alu-verilog/mips_stub/alu_control_test_isim_beh.exe" -prj "C:/Documents and Settings/student/My Documents/GitHub/alu-verilog/mips_stub/alu_control_test_beh.prj" "work.alu_control_test" "work.glbl" 
