@@ -5,9 +5,9 @@ module test_mips;
 	// Inputs
 	reg clk;
 	reg rstb;
-	reg [31:0] mem_rd_data;
 
 	// Outputs
+	wire [31:0] mem_rd_data;
 	wire [31:0] mem_wr_data;
 	wire [31:0] mem_addr;
 	wire mem_wr_ena;
@@ -32,7 +32,7 @@ module test_mips;
 		// Initialize Inputs
 		clk = 0;
 		rstb = 0;
-		mem_rd_data = 0;
+
 		//reset
 		repeat (5) @(posedge clk);
 		rstb = 1;

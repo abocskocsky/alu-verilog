@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-`define SYNTHESIS //uncomment this line when you are ready for synthesis
+//`define SYNTHESIS //uncomment this line when you are ready for synthesis
 
 module memory(
 	cpu_clk, cpu_mem_addr, cpu_mem_wr_ena, cpu_mem_wr_data, cpu_mem_rd_data,
@@ -26,7 +26,7 @@ module memory(
 	reg [31:0] physical_memory [0:4095];
 	integer ii, file;
 	reg [31:0] read_data_reg;
-	assign read_data = read_data_reg;
+	assign cpu_mem_rd_data = read_data_reg;
 	//this initial block is only used to MODEL memories - do not use this elsewhere in your design!
 	initial begin
 		//edit the included initial_memory.memh file to try different machine code
@@ -35,7 +35,7 @@ module memory(
 			physical_memory[ii] = 32'd0;
 		end
 		//read the file into the physical memory
-		$readmemb(in_file, physical_memory);
+		$readmemh(in_file, physical_memory);
 	end
 	
 	always @(posedge cpu_clk) begin
