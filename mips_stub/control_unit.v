@@ -16,18 +16,21 @@ module control_unit(I,RegDst,ALUSrc,MemtoReg,RegWrite,MemRead,MemWrite,Branch,AL
 	output wire MemRead;
 	output wire MemWrite;
 	output wire Branch;
-	output wire ALUOp1;
-	output wire ALUOp2;
+   output wire BranchNEq;
+   output wire Jump;
+	output wire [2:0] ALUOp;
 
-	wire R;
-	wire L;
-	wire S;
-	wire B;
+	wire R;  // r-type
+	wire L;  // load type
+	wire S;  // store type
+	wire B;  // branch type
+   wire J;  // jump type
 	
 	assign R = ~I[31] & ~I[30] & ~I[29] & ~I[28] & ~I[27] & ~I[26]; 
 	assign L = I[31] & ~I[30] & ~I[29] & ~I[28] & I[27] & I[26];
 	assign S = I[31] & ~I[30] & I[29] & ~I[28] & I[27] & I[26];
-	assign B = ~I[31] & ~I[30] & ~I[29] & I[28] & ~I[27] & ~I[26];
+	assign B = ~I[31] & ~I[30] & ~I[29] & I[28] & ~I[27];
+   assign J = ~I[31] & ~I[30] & ~I[29] & ~I[28] & I[27];
 	
 	assign RegDst = R;
 	assign ALUSrc = L | S;
@@ -36,10 +39,10 @@ module control_unit(I,RegDst,ALUSrc,MemtoReg,RegWrite,MemRead,MemWrite,Branch,AL
 	assign MemRead = L;
 	assign MemWrite = S;
 	assign Branch = B;
-	assign ALUOp1 = R;
-	assign ALUOp2 = B;
-	
-	
-	
+   assign BranchNEq = B & I[26];
+   assign Jump = J | (~(& I[31:26]) & (I[20:0] & 20'b1000));
+   // 1st bit: R- or I-type, 2nd bit: branch type, 3rd bit: load or store type
+	assign ALUOp = {(~B & ~J & ~L & ~S), B, (L | S)};
+
 endmodule
 `default_nettype wire
