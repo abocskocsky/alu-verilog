@@ -4,9 +4,9 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   14:29:27 11/16/2012
+// Create Date:   00:58:50 11/19/2012
 // Design Name:   alu_control
-// Module Name:   C:/Documents and Settings/student/My Documents/GitHub/alu-verilog/mips_stub/alu_control_test.v
+// Module Name:   C:/Documents and Settings/student/My Documents/GitHub/alu-verilog/mips_stub/test_alu_control.v
 // Project Name:  mips_stub
 // Target Device:  
 // Tool versions:  
@@ -22,14 +22,14 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module alu_control_test;
+module test_alu_control;
 
 	// Inputs
 	reg [2:0] alu_op;
 	reg [5:0] F;
 
 	// Outputs
-	reg [3:0] op;
+	wire [3:0] op;
 
 	// Instantiate the Unit Under Test (UUT)
 	alu_control uut (
@@ -39,7 +39,7 @@ module alu_control_test;
 	);
 
 	initial begin
-		// Initialize Inputs
+	// Initialize Inputs
 		alu_op = 3'b000;
 		F = 6'b000000;
 		// Wait 100 ns for global reset to finish
@@ -90,6 +90,7 @@ module alu_control_test;
 		// lw         0101
 		// sw:         0101
 		$finish;
+
 	end
       
 endmodule

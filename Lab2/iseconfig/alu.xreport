@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2012-10-11T11:38:05</DateModified>
+  <DateModified>2012-11-19T00:47:15</DateModified>
   <ModuleName>alu</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/bhood/.Xilinx/workspace/Lab2/iseconfig/alu.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/bhood/.Xilinx/workspace/Lab2/</ImplementationReportsDirectory>
+  <SavedFilePath>C:/Documents and Settings/student/My Documents/GitHub/alu-verilog/Lab2/iseconfig/alu.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>C:/Documents and Settings/student/My Documents/GitHub/alu-verilog/Lab2\</ImplementationReportsDirectory>
   <DateInitialized>2012-09-29T16:26:13</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
