@@ -13,7 +13,8 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
    reg  [31:0] MemDataReg, InstReg, RegA, RegB, AluOut;
    
    // Wires going into the register file.
-   wire [31:0] RegFile_WriteAddr, RegFile_WriteData;
+   wire [4:0] RegFile_WriteAddr;
+   wire [31:0] RegFile_WriteData;
         
    // Wires coming out of the register file.
    wire [31:0] RegFile_Data0, RegFile_Data1, AluAMux, AluBMux;
@@ -36,7 +37,7 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
    wire [31:0] SignExtend_Out;
    
    // Inputs that feed into the memory: address and write data.
-   assign mem_addr = IorD ? AluOut : PC;
+   assign mem_addr = Ctl_IorD ? AluOut : PC;
    assign mem_wr_data = RegB;
    
    // The muxes that feed into the register file.
@@ -65,7 +66,7 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
 
    alu ALU (.X(AluAMux), .Y(AluBMux), .op_code(AluCtl_AluOpcode), .Z(Alu_Z), .zero(Alu_Zero));
 
-   sign_extend SIGN_EXTEND (.X(InstReg[15:0]), .Z(SignExtend_Out));
+   bit_extender SIGN_EXTEND (.X(InstReg[15:0]), .Z(SignExtend_Out));
    
    // When the clock hits a positive edge, update the registers.
    always @(posedge clk) begin
