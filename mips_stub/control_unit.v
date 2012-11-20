@@ -43,7 +43,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
 	assign B = ~I[31] & ~I[30] & ~I[29] & I[28] & ~I[27];
    assign J = (~I[31] & ~I[30] & ~I[29] & ~I[28] & I[27]) | (R & (I[20:0] & 20'b1000));
    // 1st bit: R- or I-type (excl. branch), 2nd bit: branch type, 3rd bit: load or store type
-	assign ALUOp = {(~B & ~J & ~L & ~S), B, (L | S)};
+	assign ALUOp = {(L | S), B, (~B & ~J & ~L & ~S)};
    
    always @(*) begin
       case (State)
