@@ -43,7 +43,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
 	assign B = ~I[31] & ~I[30] & ~I[29] & I[28] & ~I[27];
    assign J = (~I[31] & ~I[30] & ~I[29] & ~I[28] & I[27]) | (R & (I[20:0] & 20'b1000));
    // 1st bit: R- or I-type (excl. branch), 2nd bit: branch type, 3rd bit: load or store type
-	assign ALUOp = {(L | S), B, (~B & ~J & ~L & ~S)};
+	assign AluOp = {(L | S), B, (~B & ~J & ~L & ~S)};
    
    always @(*) begin
       case (State)
@@ -59,7 +59,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
          RegWrite <= 1'b0;
          NextState <= `INST_DECODE;
       end
-      INST_DECODE: begin
+      `INST_DECODE: begin
          PcWrite <= 1'b0;
          PcWriteCond <= 1'b0;
          MemWrite <= 1'b0;
@@ -73,7 +73,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
          else if (L | S) NextState <= `INST_EXEC_M;
          else NextState <= `INST_ILLEGAL;
       end
-      INST_EXEC_M: begin
+      `INST_EXEC_M: begin
          PcWrite <= 1'b0;
          PcWriteCond <= 1'b0;
          MemWrite <= 1'b0;
@@ -85,7 +85,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
          else if (S) NextState <= `INST_MEM_S;
          else NextState <= `INST_ILLEGAL;
       end
-      INST_MEM_L: begin
+      `INST_MEM_L: begin
          PcWrite <= 1'b0;
          PcWriteCond <= 1'b0;
          IorD <= 1'b1;
@@ -96,7 +96,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
          if (L) NextState <= `INST_WRITE;
          else NextState <= `INST_ILLEGAL;
       end
-      INST_WRITE: begin
+      `INST_WRITE: begin
          PcWrite <= 1'b0;
          PcWriteCond <= 1'b0;
          MemWrite <= 1'b0;
@@ -107,7 +107,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
          if (L) NextState <= `INST_DECODE;
          else NextState <= `INST_ILLEGAL;
       end
-      INST_MEM_S: begin
+      `INST_MEM_S: begin
          PcWrite <= 1'b0;
          PcWriteCond <= 1'b0;
          IorD <= 1'b1;
@@ -117,7 +117,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
          if (S) NextState <= `INST_DECODE;
          else NextState <= `INST_ILLEGAL;
       end
-      INST_EXEC_R: begin
+      `INST_EXEC_R: begin
          PcWrite <= 1'b0;
          PcWriteCond <= 1'b0;
          MemWrite <= 1'b0;
@@ -127,7 +127,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
          if (R) NextState <= `INST_MEM_R;
          else NextState <= `INST_ILLEGAL;
       end
-      INST_MEM_R: begin
+      `INST_MEM_R: begin
          PcWrite <= 1'b0;
          PcWriteCond <= 1'b0;
          MemWrite <= 1'b0;
@@ -138,7 +138,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
          if (R) NextState <= `INST_DECODE;
          else NextState <= `INST_ILLEGAL;
       end
-      INST_EXEC_B: begin
+      `INST_EXEC_B: begin
          PcWrite <= 1'b0;
          PcWriteCond <= 1'b1;
          MemWrite <= 1'b0;
@@ -150,7 +150,7 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
          if (B) NextState <= `INST_DECODE;
          else NextState <= `INST_ILLEGAL;
       end
-      INST_EXEC_J: begin
+      `INST_EXEC_J: begin
          PcWrite <= 1'b1;
          MemWrite <= 1'b0;
          IrWrite <= 1'b0;
@@ -162,16 +162,6 @@ module control_unit(I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
       default: NextState <= `INST_ILLEGAL;
       endcase
    end
-	
-	assign RegDst = R;
-	assign ALUSrc = L | S;
-	assign MemtoReg = L;
-	assign RegWrite = R | L;
-	assign MemRead = L;
-	assign MemWrite = S;
-	assign Branch = B;
-   assign BranchNEq = B & I[26];
-   assign Jump = J | (~(& I[31:26]) & (I[20:0] & 20'b1000));
 
 endmodule
 `default_nettype wire
