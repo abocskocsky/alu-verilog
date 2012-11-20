@@ -43,10 +43,8 @@ module test_alu_control;
 		alu_op = 3'b000;
 		F = 6'b000000;
 		// Wait 100 ns for global reset to finish
+		alu_op = 3'b001;
 		#100;
-      
-		alu_op = 3'b000;
-		
 		F = 6'b001100;// 0000
 		#100;
 		F = 6'b100000;// and:        0000
@@ -64,7 +62,7 @@ module test_alu_control;
 		F = 6'b100000;// add:        0101
 		#100;
 		F = 6'b001000;// addi:       0101
-		#100;
+		#1000;
 		F = 6'b100010;// sub:        0110
 		#100;
 		F = 6'b101010;// slt:        0111

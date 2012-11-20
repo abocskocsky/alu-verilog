@@ -16,30 +16,30 @@ module alu_control(alu_op, F ,op);
 	output reg [3:0] op;
 	
 	always @(*) begin
-		if (alu_op == 3'b001) begin 
+		if (alu_op === 3'b100) begin 
 			op <= 4'b0101;
-		end else if (alu_op == 3'b010) begin
+		end else if (alu_op === 3'b010) begin
 			op <= 4'b0110;
-		end else if (alu_op == 3'b100) begin
-			if(F == 6'b001100 || F == 6'b100000) begin
+		end else if (alu_op === 3'b001) begin
+			if(F === 6'b001100 || F === 6'b100000) begin
 				op <= 4'b0000;
-			end else if ( F == 6'b100101 || F == 6'b001101 || F == 6'b001110) begin
+			end else if ( F === 6'b100101 || F === 6'b001101 || F === 6'b001110) begin
 				op <= 4'b0001;
-			end else if ( F == 6'b100110 ) begin 
+			end else if ( F === 6'b100110 ) begin 
 				op <= 4'b0010;
-			end else if ( F == 6'b100111 ) begin 
+			end else if ( F === 6'b100111 ) begin 
 				op <= 4'b0011;
-			end else if ( F == 6'b100000 || F == 6'b001000 ) begin
+			end else if ( F === 6'b100000 || F === 6'b001000 ) begin
 				op <= 4'b0101; 			
-			end else if ( F == 6'b100010 ) begin 
+			end else if ( F === 6'b100010 ) begin 
 				op <= 4'b0110;
-			end else if ( F == 6'b101010 || F == 6'b001010 ) begin 
+			end else if ( F === 6'b101010 || F === 6'b001010 ) begin 
 				op <= 4'b0111;
-			end else if ( F == 6'b000000 ) begin 
+			end else if ( F === 6'b000000 ) begin 
 				op <= 4'b1001;
-			end else if ( F == 6'b000011 ) begin 
+			end else if ( F === 6'b000011 ) begin 
 				op <= 4'b1010;		
-			end else if ( F == 6'b000010 ) begin 
+			end else if ( F === 6'b000010 ) begin 
 				op <= 4'b1000;		
 			end
 		end
