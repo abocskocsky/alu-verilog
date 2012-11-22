@@ -62,7 +62,8 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
       .AluSrcA(Ctl_AluSrcA), .AluSrcB(Ctl_AluSrcB), .RegWrite(Ctl_RegWrite),
       .RegDst(Ctl_RegDst), .NextState(Ctl_State));
 
-   alu_control ALU_CONTROL (.alu_op(Ctl_AluOp), .F(InstReg[5:0]), .op(AluCtl_AluOpcode));
+   alu_control ALU_CONTROL (.alu_op(Ctl_AluOp),
+      .opcode(InstReg[31:26]), .F(InstReg[5:0]), .op(AluCtl_AluOpcode));
 
    alu ALU (.X(AluAMux), .Y(AluBMux), .op_code(AluCtl_AluOpcode), .Z(Alu_Z), .zero(Alu_Zero));
 

@@ -17,6 +17,7 @@
 `define INST_MEM_R   4'b0111
 `define INST_EXEC_B  4'b1000
 `define INST_EXEC_J  4'b1001
+`define INST_EXEC_I  4'b1010
 `define INST_ILLEGAL 4'b1111
 
 module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
@@ -53,14 +54,15 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
    assign IrWrite = (State == 4'b0000) ? 1'b1 : 1'b0;
    assign RegWrite = (State == 4'b0100 | State == 4'b0111) ? 1'b1 : 1'b0;
    assign RegDst = (State == 4'b0111) ? 1'b1 : 1'b0;
-   assign AluSrcA = (State == 4'b0010 | State == 4'b0110 | State == 4'b1000) ? 1'b1 : 1'b0;
+   assign AluSrcA = (State == 4'b0010 | State == 4'b0110 |
+                     State == 4'b1000 | State == 4'b1010) ? 1'b1 : 1'b0;
    assign AluSrcB = (State == 4'b0000) ? 2'b01
          : ((State == 4'b0001) ? 2'b11
-            : ((State == 4'b0010) ? 2'b10 : 2'b00));
+            : ((State == 4'b0010 | State == 4'b1010) ? 2'b10 : 2'b00));
    assign PcSource = (State == 4'b1000) ? 2'b01
          : ((State == 4'b1001) ? 2'b10 : 2'b00);
-   // 1st bit: R- or I-type (excl. branch), 2nd bit: branch type, 3rd bit: load or store type
-	assign AluOp = {(L | S), B, (~B & ~J & ~L & ~S)};
+   // 1st bit: load or store type, 2nd bit: branch type, 3rd bit: R- or I-type (excl. branch, load, store)
+	assign AluOp = {(L | S), B, R & ~J};
    
    always @(posedge cclk) begin
       if (~rstb) begin
@@ -73,7 +75,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             else if (J) NextState <= `INST_EXEC_J;
             else if (B) NextState <= `INST_EXEC_B;
             else if (L | S) NextState <= `INST_EXEC_M;
-            else NextState <= `INST_ILLEGAL;
+            else NextState <= `INST_EXEC_I;
          end
          `INST_EXEC_M: begin
             if (L) NextState <= `INST_MEM_L;
@@ -85,11 +87,11 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             else NextState <= `INST_ILLEGAL;
          end
          `INST_WRITE: begin
-            if (L) NextState <= `INST_DECODE;
+            if (L) NextState <= `INST_FETCH;
             else NextState <= `INST_ILLEGAL;
          end
          `INST_MEM_S: begin
-            if (S) NextState <= `INST_DECODE;
+            if (S) NextState <= `INST_FETCH;
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_R: begin
@@ -97,15 +99,20 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             else NextState <= `INST_ILLEGAL;
          end
          `INST_MEM_R: begin
-            if (R) NextState <= `INST_DECODE;
+            // Generic I-type feeds in here too
+            if (R | (~R & ~B & ~J & ~L & ~S)) NextState <= `INST_FETCH;
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_B: begin
-            if (B) NextState <= `INST_DECODE;
+            if (B) NextState <= `INST_FETCH;
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_J: begin
-            if (J) NextState <= `INST_DECODE;
+            if (J) NextState <= `INST_FETCH;
+            else NextState <= `INST_ILLEGAL;
+         end
+         `INST_EXEC_I: begin
+            if (~R && ~J) NextState <= `INST_MEM_R;
             else NextState <= `INST_ILLEGAL;
          end
          default: NextState <= `INST_ILLEGAL;

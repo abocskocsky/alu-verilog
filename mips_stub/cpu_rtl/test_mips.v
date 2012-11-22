@@ -37,7 +37,7 @@ module test_mips;
 		repeat (5) @(posedge clk);
 		rstb = 1;
 		//run for some clocks
-		repeat(100) @(posedge clk);
+		repeat(1000) @(posedge clk);
       //dump the memory
 		MEMORY.dump();
 		$finish;
