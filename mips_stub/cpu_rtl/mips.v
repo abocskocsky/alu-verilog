@@ -55,7 +55,7 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
          .read_reg_0(InstReg[25:21]), .read_reg_1(InstReg[20:16]),
          .reg0(RegFile_Data0), .reg1(RegFile_Data1));
 
-   control_unit CONTROL (.I(InstReg), .State(Ctl_State),
+   control_unit CONTROL (.cclk(clk), .rstb(rstb), .I(InstReg), .State(Ctl_State),
       .PcWriteCond(Ctl_PcWriteCond), .PcWrite(Ctl_PcWrite), .IorD(Ctl_IorD),
       .MemRead(Ctl_MemRead), .MemWrite(Ctl_MemWrite), .MemToReg(Ctl_MemToReg),
       .IrWrite(Ctl_IrWrite), .PcSource(Ctl_PcSource), .AluOp(Ctl_AluOp),
@@ -70,18 +70,28 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
    
    // When the clock hits a positive edge, update the registers.
    always @(posedge clk) begin
-      RegA <= RegFile_Data0;
-      RegB <= RegFile_Data1;
-      mem_wr_ena <= Ctl_MemWrite;
-      MemDataReg <= mem_rd_data;
-      if (Ctl_IrWrite) InstReg <= mem_rd_data;
-      AluOut <= Alu_Z;
-      if (Ctl_PcWrite || (Ctl_PcWriteCond && Alu_Zero)) begin
-         case (Ctl_PcSource)
-         2'b00: PC <= Alu_Z;
-         2'b01: PC <= AluOut;
-         2'b10: PC <= {PC[31:28], InstReg[25:0], 2'b0};
-         endcase
+      if (~rstb) begin
+         MemDataReg <= 32'b0;
+         InstReg <= 32'b0;
+         RegA <= 32'b0;
+         RegB <= 32'b0;
+         AluOut <= 32'b0;
+         mem_wr_ena <= 1'b0;
+         PC <= 32'b0;
+      end else begin
+         RegA <= RegFile_Data0;
+         RegB <= RegFile_Data1;
+         mem_wr_ena <= Ctl_MemWrite;
+         if (Ctl_MemToReg) MemDataReg <= mem_rd_data;
+         if (Ctl_IrWrite) InstReg <= mem_rd_data;
+         AluOut <= Alu_Z;
+         if (Ctl_PcWrite || (Ctl_PcWriteCond && Alu_Zero)) begin
+            case (Ctl_PcSource)
+            2'b00: PC <= Alu_Z;
+            2'b01: PC <= AluOut;
+            2'b10: PC <= {PC[31:28], InstReg[25:0], 2'b0};
+            endcase
+         end
       end
    end
 
