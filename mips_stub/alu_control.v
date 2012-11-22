@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module alu_control(alu_op, opcode, F, op);
 	//port definitions
-	input  wire [2:0] alu_op; // bit 0: L | S, bit 1: B, bit 2: R
+	input  wire [2:0] alu_op; // 0: I-type, 1: mem, 2: branch, 3: R-type, 4: add
    input  wire [5:0] opcode;
 	input  wire [5:0] F;
 	
@@ -22,10 +22,12 @@ module alu_control(alu_op, opcode, F, op);
          else if (opcode == 6'b001101) op <= 4'b0001;  // ori
          else if (opcode == 6'b001010) op <= 4'b0111;  // slti
          else if (opcode == 6'b001110) op <= 4'b0010;  // xori
-      end // Load and store instructions
-      else if (alu_op == 3'b100) op <= 4'b0101;
+      end // Load and store instructions, raw add
+      else if (alu_op == 3'b001 || alu_op == 3'b100) op <= 4'b0101;
+      // Branch instructions
 		else if (alu_op == 3'b010) op <= 4'b0110;
-		else if (alu_op === 3'b001) begin
+      // R-type instructions
+		else if (alu_op === 3'b011) begin
          if (F == 6'b100100) op <= 4'b0000; // and
          else if (F == 6'b100101) op <= 4'b0001; // or
          else if (F == 6'b100110) op <= 4'b0010; // xor

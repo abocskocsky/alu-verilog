@@ -61,8 +61,11 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             : ((State == 4'b0010 | State == 4'b1010) ? 2'b10 : 2'b00));
    assign PcSource = (State == 4'b1000) ? 2'b01
          : ((State == 4'b1001) ? 2'b10 : 2'b00);
-   // 1st bit: load or store type, 2nd bit: branch type, 3rd bit: R- or I-type (excl. branch, load, store)
-	assign AluOp = {(L | S), B, R & ~J};
+   // 0: I-type, 1: mem, 2: branch, 3: R-type, 4: add
+	assign AluOp = (State == `INST_FETCH) ? 3'b100
+      : (R ? 3'b011
+         : (B ? 3'b010
+            : ((L | S) ? 3'b001 : 3'b000)));
    
    always @(posedge cclk) begin
       if (~rstb) begin
