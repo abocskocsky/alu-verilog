@@ -45,10 +45,10 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
    assign RegFile_WriteData = Ctl_MemToReg ? MemDataReg : AluOut;
    
    // The muxes that feed into the ALU.
-   assign AluAMux = Ctl_AluSrcA ? RegA : PC;
+   assign AluAMux = Ctl_AluSrcA ? RegFile_Data0 : PC;
    assign AluBMux = Ctl_AluSrcB[1]
       ? (Ctl_AluSrcB[0] ? {SignExtend_Out[29:0],2'b0} : SignExtend_Out)
-      : (Ctl_AluSrcB[0] ? 32'd4 : RegB);
+      : (Ctl_AluSrcB[0] ? 32'd4 : RegFile_Data1);
 
 	register_file REGFILE (.cclk(clk), .rstb(rstb), .write(Ctl_RegWrite),
          .write_reg(RegFile_WriteAddr), .write_data(RegFile_WriteData),

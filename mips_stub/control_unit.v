@@ -18,6 +18,7 @@
 `define INST_EXEC_B  4'b1000
 `define INST_EXEC_J  4'b1001
 `define INST_EXEC_I  4'b1010
+`define INST_MEM_I   4'b1011
 `define INST_ILLEGAL 4'b1111
 
 module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
@@ -45,22 +46,22 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
 	assign B = ~I[31] & ~I[30] & ~I[29] & I[28] & ~I[27];
    assign J = (~I[31] & ~I[30] & ~I[29] & ~I[28] & I[27]) | (R & (I[20:0] & 20'b1000));
    
-   assign PcWrite = (State == 4'b0000 | State == 4'b1001) ? 1'b1 : 1'b0;
-   assign PcWriteCond = (State == 4'b1000) ? 1'b1 : 1'b0;
-   assign IorD = (State == 4'b0011 | State == 4'b0101) ? 1'b1 : 1'b0;
-   assign MemRead = (State == 4'b0000 | State == 4'b0011) ? 1'b1 : 1'b0;
-   assign MemWrite = (State == 4'b0101) ? 1'b1 : 1'b0;
-   assign MemToReg = (State == 4'b0100) ? 1'b1 : 1'b0;
-   assign IrWrite = (State == 4'b0000) ? 1'b1 : 1'b0;
-   assign RegWrite = (State == 4'b0100 | State == 4'b0111) ? 1'b1 : 1'b0;
-   assign RegDst = (State == 4'b0111) ? 1'b1 : 1'b0;
-   assign AluSrcA = (State == 4'b0010 | State == 4'b0110 |
-                     State == 4'b1000 | State == 4'b1010) ? 1'b1 : 1'b0;
-   assign AluSrcB = (State == 4'b0000) ? 2'b01
-         : ((State == 4'b0001) ? 2'b11
-            : ((State == 4'b0010 | State == 4'b1010) ? 2'b10 : 2'b00));
-   assign PcSource = (State == 4'b1000) ? 2'b01
-         : ((State == 4'b1001) ? 2'b10 : 2'b00);
+   assign PcWrite = (State == `INST_FETCH | State == `INST_EXEC_J) ? 1'b1 : 1'b0;
+   assign PcWriteCond = (State == `INST_EXEC_B) ? 1'b1 : 1'b0;
+   assign IorD = (State == `INST_MEM_L | State == `INST_MEM_S) ? 1'b1 : 1'b0;
+   assign MemRead = (State == `INST_FETCH | State == `INST_MEM_L) ? 1'b1 : 1'b0;
+   assign MemWrite = (State == `INST_MEM_S) ? 1'b1 : 1'b0;
+   assign MemToReg = (State == `INST_WRITE) ? 1'b1 : 1'b0;
+   assign IrWrite = (State == `INST_FETCH) ? 1'b1 : 1'b0;
+   assign RegWrite = (State == `INST_WRITE | State == `INST_MEM_R | State == `INST_MEM_I) ? 1'b1 : 1'b0;
+   assign RegDst = (State == `INST_MEM_R) ? 1'b1 : 1'b0;
+   assign AluSrcA = (State == `INST_EXEC_M | State == `INST_EXEC_R |
+                     State == `INST_EXEC_B | State == `INST_EXEC_I) ? 1'b1 : 1'b0;
+   assign AluSrcB = (State == `INST_FETCH) ? 2'b01
+         : ((State == `INST_DECODE) ? 2'b11
+            : ((State == `INST_EXEC_M | State == `INST_EXEC_I) ? 2'b10 : 2'b00));
+   assign PcSource = (State == `INST_EXEC_B) ? 2'b01
+         : ((State == `INST_EXEC_J) ? 2'b10 : 2'b00);
    // 0: I-type, 1: mem, 2: branch, 3: R-type, 4: add
 	assign AluOp = (State == `INST_FETCH) ? 3'b100
       : (R ? 3'b011
@@ -69,7 +70,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
    
    always @(posedge cclk) begin
       if (~rstb) begin
-         NextState <= 4'b0000;
+         NextState <= `INST_FETCH;
       end else begin
          case (State)
          `INST_FETCH: NextState <= `INST_DECODE;
@@ -102,8 +103,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             else NextState <= `INST_ILLEGAL;
          end
          `INST_MEM_R: begin
-            // Generic I-type feeds in here too
-            if (R | (~R & ~B & ~J & ~L & ~S)) NextState <= `INST_FETCH;
+            if (R) NextState <= `INST_FETCH;
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_B: begin
@@ -115,7 +115,11 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_I: begin
-            if (~R && ~J) NextState <= `INST_MEM_R;
+            if (~R && ~J) NextState <= `INST_MEM_I;
+            else NextState <= `INST_ILLEGAL;
+         end
+         `INST_MEM_I: begin
+            if (~R && ~J) NextState <= `INST_FETCH;
             else NextState <= `INST_ILLEGAL;
          end
          default: NextState <= `INST_ILLEGAL;

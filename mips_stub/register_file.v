@@ -15,16 +15,17 @@ module register_file(cclk,rstb,write,read_reg_0,read_reg_1,write_reg,write_data,
 	input  wire [4:0] read_reg_1;
 	input  wire [4:0] write_reg;
 	input  wire [31:0] write_data;
-	output reg [31:0] reg0;
-	output reg [31:0] reg1;
+	output wire [31:0] reg0;
+	output wire [31:0] reg1;
    
    // Hold the state of the register file.
    reg [31:0] registers[31:0];
    
+   assign reg0 = registers[read_reg_0];
+   assign reg1 = registers[read_reg_1];
+   
    always @(posedge cclk) begin
       if (~rstb) begin
-         reg0 <= 32'b0;
-         reg1 <= 32'b0;
          registers[0] <= 32'b0;
          registers[1] <= 32'b0;
          registers[2] <= 32'b0;
@@ -58,8 +59,6 @@ module register_file(cclk,rstb,write,read_reg_0,read_reg_1,write_reg,write_data,
          registers[30] <= 32'b0;
          registers[31] <= 32'b0;
       end else begin
-         reg0 <= registers[read_reg_0];
-         reg1 <= registers[read_reg_1];
          if (write) begin
             registers[write_reg] <= write_data;
          end
