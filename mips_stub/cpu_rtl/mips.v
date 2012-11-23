@@ -4,7 +4,7 @@
 module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
 
 	input wire clk, rstb;
-	output reg mem_wr_ena;
+	output wire mem_wr_ena;
 	output wire [31:0] mem_wr_data, mem_addr;
 	input wire [31:0] mem_rd_data;             
 	output reg [31:0] PC;
@@ -20,9 +20,9 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
    wire [31:0] RegFile_Data0, RegFile_Data1, AluAMux, AluBMux;
    
    // Wires coming out of the control unit.
-   wire Ctl_PcWriteCond, Ctl_PcWrite, Ctl_IorD, Ctl_MemRead, Ctl_MemWrite,
+   wire Ctl_PcWrite, Ctl_IorD, Ctl_MemRead, Ctl_MemWrite,
         Ctl_MemToReg, Ctl_IrWrite, Ctl_AluSrcA, Ctl_RegWrite, Ctl_RegDst;
-   wire [1:0] Ctl_PcSource, Ctl_AluSrcB;
+   wire [1:0] Ctl_PcWriteCond, Ctl_PcSource, Ctl_AluSrcB;
    wire [2:0] Ctl_AluOp;
    wire [3:0] Ctl_State;
 
@@ -39,16 +39,17 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
    // Inputs that feed into the memory: address and write data.
    assign mem_addr = Ctl_IorD ? AluOut : PC;
    assign mem_wr_data = RegB;
+   assign mem_wr_ena = Ctl_MemWrite;
    
    // The muxes that feed into the register file.
    assign RegFile_WriteAddr = Ctl_RegDst ? InstReg[15:11] : InstReg[20:16];
-   assign RegFile_WriteData = Ctl_MemToReg ? MemDataReg : AluOut;
+   assign RegFile_WriteData = Ctl_MemToReg ? mem_rd_data : AluOut;
    
    // The muxes that feed into the ALU.
-   assign AluAMux = Ctl_AluSrcA ? RegFile_Data0 : PC;
+   assign AluAMux = Ctl_AluSrcA ? RegA : PC;
    assign AluBMux = Ctl_AluSrcB[1]
       ? (Ctl_AluSrcB[0] ? {SignExtend_Out[29:0],2'b0} : SignExtend_Out)
-      : (Ctl_AluSrcB[0] ? 32'd4 : RegFile_Data1);
+      : (Ctl_AluSrcB[0] ? 32'd4 : RegB);
 
 	register_file REGFILE (.cclk(clk), .rstb(rstb), .write(Ctl_RegWrite),
          .write_reg(RegFile_WriteAddr), .write_data(RegFile_WriteData),
@@ -77,16 +78,15 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
          RegA <= 32'b0;
          RegB <= 32'b0;
          AluOut <= 32'b0;
-         mem_wr_ena <= 1'b0;
          PC <= 32'b0;
       end else begin
          RegA <= RegFile_Data0;
          RegB <= RegFile_Data1;
-         mem_wr_ena <= Ctl_MemWrite;
          if (Ctl_MemToReg) MemDataReg <= mem_rd_data;
          if (Ctl_IrWrite) InstReg <= mem_rd_data;
          AluOut <= Alu_Z;
-         if (Ctl_PcWrite || (Ctl_PcWriteCond && Alu_Zero)) begin
+         if (Ctl_PcWrite || (Ctl_PcWriteCond[0] && Alu_Zero) ||
+              (Ctl_PcWriteCond[1] && ~Alu_Zero)) begin
             case (Ctl_PcSource)
             2'b00: PC <= Alu_Z;
             2'b01: PC <= AluOut;
