@@ -30,18 +30,20 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
 	input  wire [31:0] I;
    input  wire [3:0] State;
    output wire PcWrite, IorD, MemRead, MemWrite,
-      MemToReg, IrWrite, AluSrcA, RegWrite, RegDst;
-   output wire [1:0] PcSource, PcWriteCond, AluSrcB;
+               MemToReg, IrWrite, RegWrite, RegDst;
+   output wire [1:0] PcSource, PcWriteCond, AluSrcA, AluSrcB;
    output wire [2:0] AluOp;
    output reg  [3:0] NextState;
 
 	wire R;  // r-type
+   wire RS; // r-type, shift instruction
 	wire L;  // load type
 	wire S;  // store type
 	wire B;  // branch type
    wire J;  // jump type
 	
-	assign R = ~I[31] & ~I[30] & ~I[29] & ~I[28] & ~I[27] & ~I[26]; 
+	assign R = ~I[31] & ~I[30] & ~I[29] & ~I[28] & ~I[27] & ~I[26];
+   assign RS = R & (I[5:2] == 4'b0000);
 	assign L = I[31] & ~I[30] & ~I[29] & ~I[28] & I[27] & I[26];
 	assign S = I[31] & ~I[30] & I[29] & ~I[28] & I[27] & I[26];
 	assign B = ~I[31] & ~I[30] & ~I[29] & I[28] & ~I[27];
@@ -58,7 +60,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
    assign RegWrite = (State == `INST_WRITE | State == `INST_MEM_R | State == `INST_MEM_I) ? 1'b1 : 1'b0;
    assign RegDst = (State == `INST_MEM_R) ? 1'b1 : 1'b0;
    assign AluSrcA = (State == `INST_EXEC_M | State == `INST_EXEC_R |
-                     State == `INST_EXEC_B | State == `INST_EXEC_I) ? 1'b1 : 1'b0;
+         State == `INST_EXEC_B | State == `INST_EXEC_I) ? (R & RS ? 2'b10 : 2'b01) : 2'b00;
    assign AluSrcB = (State == `INST_FETCH) ? 2'b01
          : ((State == `INST_DECODE) ? 2'b11
             : ((State == `INST_EXEC_M | State == `INST_EXEC_I) ? 2'b10 : 2'b00));
