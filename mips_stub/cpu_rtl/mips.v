@@ -15,15 +15,15 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
    // Wires going into the register file.
    wire [4:0] RegFile_WriteAddr;
    wire [31:0] RegFile_WriteData;
-        
+         
    // Wires coming out of the register file.
    wire [31:0] RegFile_Data0, RegFile_Data1, AluAMux, AluBMux;
    
    // Wires coming out of the control unit.
    wire Ctl_PcWrite, Ctl_IorD, Ctl_MemRead, Ctl_MemWrite,
-        Ctl_RegWrite, Ctl_IrWrite, Ctl_AluSrcA;  
-	wire [1:0] Ctl_RegDst, Ctl_MemToReg;
-   wire [1:0] Ctl_PcWriteCond, Ctl_PcSource, Ctl_AluSrcB;
+        Ctl_RegWrite, Ctl_IrWrite;
+	wire [1:0] Ctl_MemToReg, Ctl_RegDst;
+   wire [1:0] Ctl_PcWriteCond, Ctl_PcSource, Ctl_AluSrcA, Ctl_AluSrcB;
    wire [2:0] Ctl_AluOp;
    wire [3:0] Ctl_State;
 
@@ -50,7 +50,7 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
 	assign RegFile_WriteData = Ctl_MemToReg[1] ? PC : (Ctl_MemToReg[0] ? mem_rd_data : AluOut);
    
    // The muxes that feed into the ALU.
-   assign AluAMux = Ctl_AluSrcA ? RegA : PC;
+   assign AluAMux = Ctl_AluSrcA[1] ? InstReg[10:6] : (Ctl_AluSrcA[0] ? RegA : PC);
    assign AluBMux = Ctl_AluSrcB[1]
       ? (Ctl_AluSrcB[0] ? {SignExtend_Out[29:0],2'b0} : SignExtend_Out)
       : (Ctl_AluSrcB[0] ? 32'd4 : RegB);
@@ -95,6 +95,7 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
             2'b00: PC <= Alu_Z;
             2'b01: PC <= AluOut;
             2'b10: PC <= {PC[31:28], InstReg[25:0], 2'b0};
+            2'b11: PC <= RegA;
             endcase
          end
       end

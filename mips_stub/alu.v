@@ -27,9 +27,9 @@ module alu(X,Y,op_code,Z,overflow,equal,zero);
    subtract_32bit SUBTRACTER (.X(X), .Y(Y), .C_IN(1'b0), .Z(sub_output), .C_OUT(sub_cout));
    set_less_than_32bit SLT (.X(X), .Y(Y), .Z(slt_output[0]));
    assign slt_output[31:1] = 31'b0;
-   shift_right_logical_32bit SRL (.X(X), .Y(Y), .Z(srl_output));
-   shift_right_arithmetic_32bit SRA (.X(X), .Y(Y), .Z(sra_output));
-   shift_left_32bit SLL (.X(X), .Y(Y), .Z(sll_output));
+   shift_right_logical_32bit SRL (.X(Y), .Y(X), .Z(srl_output));
+   shift_right_arithmetic_32bit SRA (.X(Y), .Y(X), .Z(sra_output));
+   shift_left_32bit SLL (.X(Y), .Y(X), .Z(sll_output));
    
    // Multiplex it all together for the result Z
    mux_16to1 RESULT_MUX
