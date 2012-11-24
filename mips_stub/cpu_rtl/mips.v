@@ -85,8 +85,8 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
          if (Ctl_MemToReg) MemDataReg <= mem_rd_data;
          if (Ctl_IrWrite) InstReg <= mem_rd_data;
          AluOut <= Alu_Z;
-         if (Ctl_PcWrite || (Ctl_PcWriteCond[0] && Alu_Zero) ||
-              (Ctl_PcWriteCond[1] && ~Alu_Zero)) begin
+         if (Ctl_PcWrite || (Ctl_PcWriteCond[0] & Alu_Zero) ||
+              (Ctl_PcWriteCond[1] & ~Alu_Zero)) begin
             case (Ctl_PcSource)
             2'b00: PC <= Alu_Z;
             2'b01: PC <= AluOut;

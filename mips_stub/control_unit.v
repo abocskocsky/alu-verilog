@@ -19,6 +19,7 @@
 `define INST_EXEC_J  4'b1001
 `define INST_EXEC_I  4'b1010
 `define INST_MEM_I   4'b1011
+`define INST_DELAY   4'b1100
 `define INST_ILLEGAL 4'b1111
 
 module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
@@ -108,7 +109,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_B: begin
-            if (B) NextState <= `INST_FETCH;
+            if (B) NextState <= `INST_DELAY;
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_J: begin
@@ -123,6 +124,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             if (~R && ~J) NextState <= `INST_FETCH;
             else NextState <= `INST_ILLEGAL;
          end
+         `INST_DELAY: NextState <= `INST_FETCH;
          default: NextState <= `INST_ILLEGAL;
          endcase
       end
