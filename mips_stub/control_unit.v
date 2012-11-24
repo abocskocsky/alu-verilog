@@ -97,7 +97,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             else NextState <= `INST_ILLEGAL;
          end
          `INST_MEM_S: begin
-            if (S) NextState <= `INST_FETCH;
+            if (S) NextState <= `INST_DELAY;
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_R: begin
@@ -113,7 +113,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_J: begin
-            if (J) NextState <= `INST_FETCH;
+            if (J) NextState <= `INST_DELAY;
             else NextState <= `INST_ILLEGAL;
          end
          `INST_EXEC_I: begin
