@@ -20,6 +20,7 @@
 `define INST_EXEC_I  4'b1010
 `define INST_MEM_I   4'b1011
 `define INST_DELAY   4'b1100
+`define INST_MEM_JAL 4'b1101
 `define INST_ILLEGAL 4'b1111
 
 module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, MemWrite,
@@ -29,9 +30,8 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
    input  wire cclk, rstb;
 	input  wire [31:0] I;
    input  wire [3:0] State;
-   output wire PcWrite, IorD, MemRead, MemWrite,
-               MemToReg, IrWrite, RegWrite, RegDst;
-   output wire [1:0] PcSource, PcWriteCond, AluSrcA, AluSrcB;
+   output wire PcWrite, IorD, MemRead, MemWrite, MemToReg, IrWrite, RegWrite;
+   output wire [1:0] PcSource, PcWriteCond, AluSrcA, AluSrcB, RegDst;
    output wire [2:0] AluOp;
    output reg  [3:0] NextState;
 
@@ -41,6 +41,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
 	wire S;  // store type
 	wire B;  // branch type
    wire J;  // jump type
+   wire JAL;
 	
 	assign R = ~I[31] & ~I[30] & ~I[29] & ~I[28] & ~I[27] & ~I[26];
    assign RS = R & (I[5:2] == 4'b0000);
@@ -48,6 +49,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
 	assign S = I[31] & ~I[30] & I[29] & ~I[28] & I[27] & I[26];
 	assign B = ~I[31] & ~I[30] & ~I[29] & I[28] & ~I[27];
    assign J = (~I[31] & ~I[30] & ~I[29] & ~I[28] & I[27]) | (R & (I[20:0] == 20'd8));
+   assign JAL = J & (I[31:26] == 6'b000011);
    
    assign PcWrite = (State == `INST_FETCH | State == `INST_EXEC_J) ? 1'b1 : 1'b0;
    // MSB: bne, LSB: beq
@@ -57,8 +59,9 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
    assign MemWrite = (State == `INST_MEM_S) ? 1'b1 : 1'b0;
    assign MemToReg = (State == `INST_WRITE) ? 1'b1 : 1'b0;
    assign IrWrite = (State == `INST_FETCH) ? 1'b1 : 1'b0;
-   assign RegWrite = (State == `INST_WRITE | State == `INST_MEM_R | State == `INST_MEM_I) ? 1'b1 : 1'b0;
-   assign RegDst = (State == `INST_MEM_R) ? 1'b1 : 1'b0;
+   assign RegWrite = (State == `INST_WRITE | State == `INST_MEM_R | State == `INST_MEM_I | State == `INST_MEM_JAL) ? 1'b1 : 1'b0;
+   assign RegDst = (State == `INST_MEM_JAL) ? 2'b10
+         : (State == `INST_MEM_R ? 1'b1 : 1'b0);
    assign AluSrcA = (State == `INST_EXEC_M | State == `INST_EXEC_R |
          State == `INST_EXEC_B | State == `INST_EXEC_I) ? (R & RS ? 2'b10 : 2'b01) : 2'b00;
    assign AluSrcB = (State == `INST_FETCH) ? 2'b01
@@ -79,7 +82,8 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
          case (State)
          `INST_FETCH: NextState <= `INST_DECODE;
          `INST_DECODE: begin
-            if (J) NextState <= `INST_EXEC_J;
+            if (JAL) NextState <= `INST_MEM_JAL;
+            else if (J) NextState <= `INST_EXEC_J;
             else if (B) NextState <= `INST_EXEC_B;
             else if (L | S) NextState <= `INST_EXEC_M;
             else if (R) NextState <= `INST_EXEC_R;
@@ -127,6 +131,10 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
             else NextState <= `INST_ILLEGAL;
          end
          `INST_DELAY: NextState <= `INST_FETCH;
+         `INST_MEM_JAL: begin
+            if (JAL) NextState <= `INST_EXEC_J;
+            else NextState <= `INST_ILLEGAL;
+         end
          default: NextState <= `INST_ILLEGAL;
          endcase
       end
