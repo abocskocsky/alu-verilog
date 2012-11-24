@@ -45,7 +45,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
 	assign L = I[31] & ~I[30] & ~I[29] & ~I[28] & I[27] & I[26];
 	assign S = I[31] & ~I[30] & I[29] & ~I[28] & I[27] & I[26];
 	assign B = ~I[31] & ~I[30] & ~I[29] & I[28] & ~I[27];
-   assign J = (~I[31] & ~I[30] & ~I[29] & ~I[28] & I[27]) | (R & (I[20:0] & 20'b1000));
+   assign J = (~I[31] & ~I[30] & ~I[29] & ~I[28] & I[27]) | (R & (I[20:0] == 20'd8));
    
    assign PcWrite = (State == `INST_FETCH | State == `INST_EXEC_J) ? 1'b1 : 1'b0;
    // MSB: bne, LSB: beq
@@ -63,7 +63,7 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
          : ((State == `INST_DECODE) ? 2'b11
             : ((State == `INST_EXEC_M | State == `INST_EXEC_I) ? 2'b10 : 2'b00));
    assign PcSource = (State == `INST_EXEC_B) ? 2'b01
-         : ((State == `INST_EXEC_J) ? 2'b10 : 2'b00);
+         : ((State == `INST_EXEC_J) ? (R ? 2'b11 : 2'b10) : 2'b00);
    // 0: I-type, 1: mem, 2: branch, 3: R-type, 4: add
 	assign AluOp = (State == `INST_FETCH | State == `INST_DECODE) ? 3'b100
       : (R ? 3'b011
@@ -77,10 +77,10 @@ module control_unit(cclk, rstb, I, State, PcWriteCond, PcWrite, IorD, MemRead, M
          case (State)
          `INST_FETCH: NextState <= `INST_DECODE;
          `INST_DECODE: begin
-            if (R) NextState <= `INST_EXEC_R;
-            else if (J) NextState <= `INST_EXEC_J;
+            if (J) NextState <= `INST_EXEC_J;
             else if (B) NextState <= `INST_EXEC_B;
             else if (L | S) NextState <= `INST_EXEC_M;
+            else if (R) NextState <= `INST_EXEC_R;
             else NextState <= `INST_EXEC_I;
          end
          `INST_EXEC_M: begin

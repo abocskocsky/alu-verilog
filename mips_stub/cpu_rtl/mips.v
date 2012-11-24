@@ -91,6 +91,7 @@ module mips(clk, rstb, mem_wr_data, mem_addr, mem_rd_data, mem_wr_ena, PC);
             2'b00: PC <= Alu_Z;
             2'b01: PC <= AluOut;
             2'b10: PC <= {PC[31:28], InstReg[25:0], 2'b0};
+            2'b11: PC <= RegA;
             endcase
          end
       end
